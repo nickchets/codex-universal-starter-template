@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify (fail fast)
+        run: ./tools/verify_fail_fast.sh
+
+      - name: Governance gate
+        run: python3 tools/dev_harness_server.py workflow-context-gate --label ci --strict-medium
