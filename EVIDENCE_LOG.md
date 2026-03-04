@@ -191,3 +191,46 @@ Commands (PASS):
 Artifacts:
 - `shared/spikes/workflow_context_gate_template_simplify_gap_add_20260303_20260303_153250/summary.json`
 - `shared/spikes/workflow_context_gate_template_simplify_gap_post_evidence_20260303_20260303_153345/summary.json`
+
+## Evidence (2026-03-04) — Wrapper plan/evidence contour synced from ozon into template
+
+Scope:
+- Reviewed latest `ozon` board/evidence wrapper updates and transferred reusable governance patterns into template sources.
+- Upgraded template `ACTION_PLAN` and markdown templates to reflect stricter wrapper-driven close gates and richer evidence structure.
+
+Updated files:
+- `ACTION_PLAN.md`
+- `docs/templates/TASK_BREAKDOWN_TEMPLATE.md`
+- `docs/templates/EVIDENCE_BLOCK_TEMPLATE.md`
+- `EVIDENCE_LOG.md`
+
+Verification commands:
+- `cd /home/lap/projects/codex-universal-starter-template && python3 -m py_compile tools/*.py`
+- `cd /home/lap/projects/codex-universal-starter-template && ./tools/verify_fail_fast.sh`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/dev_harness_server.py workflow-context-gate --label template_wrapper_sync_20260304 --strict-medium`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/dev_harness_server.py governance-audit --label template_wrapper_sync_20260304`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/dev_harness_server.py context-bootstrap --label template_wrapper_sync_20260304`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/dev_harness_server.py governance-quality-audit --label template_wrapper_sync_20260304 --strict-medium`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/agent_bootstrap.py --label template_wrapper_sync_20260304`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/dev_harness_server.py workflow-context-gate --label template_wrapper_sync_post_fix_20260304 --strict-medium`
+
+Observed:
+- Wrapper governance checks are `PASS` after template updates (`status_code=0` across workflow/governance/bootstrap/quality).
+- Post-fix strict workflow gate is also `PASS` (`template_wrapper_sync_post_fix_20260304`).
+- Board invariants remain valid (`DOING=1`, `NEXT=2`).
+- Template now includes transferred wrapper practices:
+  - hard close gates (`workflow-context-gate`, `context-bootstrap`, `update-plan-freshness`);
+  - mandatory `Check-A/Check-B` in task breakdown;
+  - expanded evidence block schema (`Updated files`, `Observed`, optional `Metrics update`, optional `Directive/context sync`).
+
+Artifacts:
+- `shared/spikes/workflow_context_gate_template_wrapper_sync_20260304_20260304_145917/summary.json`
+- `shared/spikes/governance_audit_template_wrapper_sync_20260304_20260304_145917/summary.json`
+- `shared/spikes/context_bootstrap_template_wrapper_sync_20260304_20260304_145917/summary.json`
+- `shared/spikes/governance_quality_audit_template_wrapper_sync_20260304_20260304_145917/summary.json`
+- `shared/spikes/agent_bootstrap_template_wrapper_sync_20260304_20260304_145923/summary.json`
+- `shared/spikes/workflow_context_gate_template_wrapper_sync_post_fix_20260304_20260304_150053/summary.json`
+
+Decision:
+- Template wrapper governance baseline is upgraded and validated.
+- Next expected use: instantiate a new project from this template and run the same strict wrapper close-gates unchanged.

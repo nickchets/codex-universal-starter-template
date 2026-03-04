@@ -3,13 +3,28 @@
 Scope:
 - <what was changed>
 
-Commands:
-- `<command_1>` -> PASS/FAIL
-- `<command_2>` -> PASS/FAIL
+Updated files:
+- `<file_1>`
+- `<file_2>`
+
+Verification commands:
+- `<command_1>`
+- `<command_2>`
+
+Observed:
+- `<key result 1>`
+- `<key result 2>`
 
 Artifacts:
 - `<path/to/artifact_1>`
 - `<path/to/artifact_2>`
 
+Metrics update (optional):
+- `<agent_metrics command>`
+
+Directive/context sync (optional):
+- `<directive-track or workflow-context-gate evidence>`
+
 Decision:
-- <accepted outcome and next step>
+- <accepted outcome>
+- <next step or blocked reason>

@@ -1,7 +1,19 @@
 ### <CARD-ID>
-1. Clarify objective and constraints.
-2. Implement minimal safe diff.
-3. Run targeted verification.
-4. Capture artifacts.
-5. Update `EVIDENCE_LOG.md`.
-6. Transition board state.
+
+- [ ] Step: `<one atomic action>`
+- [ ] Done when: `<observable completion criterion>`
+- [ ] Verify/Evidence: `<command or artifact path>`
+- [ ] Check-A (contract): `<invariants/policy/contract proof>`
+- [ ] Check-B (behavior): `<runtime/live behavior proof>`
+
+- [ ] Step: `<next atomic action>`
+- [ ] Done when: `<observable completion criterion>`
+- [ ] Verify/Evidence: `<command or artifact path>`
+- [ ] Check-A (contract): `<invariants/policy/contract proof>`
+- [ ] Check-B (behavior): `<runtime/live behavior proof>`
+
+Rules:
+- Use `8-20` steps for medium/high-risk cards.
+- Keep each step atomic (one action, one outcome).
+- Do not close the card unless both checks are `PASS`.
+- If `Check-B` is `INCONCLUSIVE`, add an explicit recheck step with new artifacts.
