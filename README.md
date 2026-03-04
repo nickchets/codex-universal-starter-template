@@ -25,6 +25,7 @@ This template is extracted from a hardened real-world setup and anonymized for g
 - Context persistence protocol:
   - bootstrap order
   - directive capture register
+  - update-plan lifecycle (`sync/freshness/trace`)
   - workflow context gate
 - Lightweight tooling:
   - `tools/agent_bootstrap.py`
@@ -44,6 +45,7 @@ This template is extracted from a hardened real-world setup and anonymized for g
 ```bash
 python3 tools/agent_bootstrap.py
 python3 tools/dev_harness_server.py workflow-context-gate --label bootstrap
+python3 tools/dev_harness_server.py update-plan-sync --summary "bootstrap snapshot" --status IN_PROGRESS --label bootstrap
 ```
 
 4. Run baseline verification:

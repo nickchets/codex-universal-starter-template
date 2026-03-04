@@ -281,3 +281,50 @@ Artifacts:
 Decision:
 - Core lifecycle parity is now present in template wrapper while keeping domain-neutral design.
 - Residual gaps are now explicit and intentional: no service/API/observability harness profile in baseline template.
+
+## Evidence (2026-03-04) — Documentation review pass (clarity + consistency)
+
+Scope:
+- Re-read repository documentation (core contracts, governance docs, onboarding/protocol docs, templates).
+- Removed wording drift around plan lifecycle and aligned docs with current wrapper command surface.
+- Verified that documented wrapper commands are valid and that placeholders remain only in intentional template sections.
+
+Updated files:
+- `ACTION_PLAN.md`
+- `AGENTS.md`
+- `CODEX_RULES.md`
+- `DEBUG.md`
+- `DOCUMENTATION_INDEX.md`
+- `README.md`
+- `README.ru.md`
+- `docs/AGENT_BOOTSTRAP_PROTOCOL.en.md`
+- `docs/AGENT_BOOTSTRAP_PROTOCOL.ru.md`
+- `docs/AGENT_STARTUP_QUESTIONNAIRE.en.md`
+- `docs/AGENT_STARTUP_QUESTIONNAIRE.ru.md`
+- `docs/AGENT_START_PROMPT.en.md`
+- `docs/AGENT_START_PROMPT.ru.md`
+- `docs/CONTEXT_SYNC_PROTOCOL.en.md`
+- `docs/CONTEXT_SYNC_PROTOCOL.ru.md`
+- `docs/ONBOARDING_30_MIN.en.md`
+- `docs/ONBOARDING_30_MIN.ru.md`
+- `docs/templates/EVIDENCE_BLOCK_TEMPLATE.md`
+- `EVIDENCE_LOG.md`
+
+Verification commands:
+- `cd /home/lap/projects/codex-universal-starter-template && python3 -m py_compile tools/*.py`
+- `cd /home/lap/projects/codex-universal-starter-template && ./tools/verify_fail_fast.sh`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/dev_harness_server.py workflow-context-gate --label docs_review_20260304 --strict-medium`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 - <<'PY' ... PY` (inline checker: all documented `dev_harness_server.py` commands must exist in CLI help)
+- `cd /home/lap/projects/codex-universal-starter-template && rg -n "<fill>|<fill functional outcome>" -S *.md docs/*.md docs/**/*.md`
+
+Observed:
+- Documentation now consistently uses `update-plan-sync/update-plan-freshness/update-plan-trace` where plan lifecycle is required.
+- Startup/onboarding and context-sync chains are synchronized across EN/RU docs.
+- Documented `dev_harness_server.py` commands resolve to valid CLI entries.
+- `<fill>` placeholders remain only in intentional template contract files (`PROJECT_MANIFEST.md`, `ACTION_PLAN.md`).
+
+Artifacts:
+- `shared/spikes/workflow_context_gate_docs_review_20260304_20260304_153822/summary.json`
+
+Decision:
+- Documentation pass accepted: wording is tighter, redundant drift points removed, and contracts are aligned with current wrapper behavior.

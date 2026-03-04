@@ -31,6 +31,9 @@
 - `docs/ACKNOWLEDGEMENTS.md`
 - `docs/SKILL_AUTHORING_GUIDELINES.md`
 
+## Audits
+- `docs/WRAPPER_PARITY_AUDIT_20260304.md`
+
 ## Startup Instructions
 - `docs/AGENT_STARTUP_QUESTIONNAIRE.en.md`
 - `docs/AGENT_STARTUP_QUESTIONNAIRE.ru.md`

@@ -31,11 +31,12 @@
 
 ## 5. Mandatory Transaction
 1. Capture directive.
-2. Lock board card.
-3. Implement.
-4. Verify.
-5. Record evidence.
-6. Transition card.
+2. Sync active plan snapshot (`update-plan-sync`).
+3. Lock board card.
+4. Implement.
+5. Verify.
+6. Record evidence.
+7. Transition card.
 
 No `DOING->DONE` without evidence block.
 
@@ -44,6 +45,8 @@ No `DOING->DONE` without evidence block.
   - `./tools/verify_fail_fast.sh`
 - Governance gate:
   - `python3 tools/dev_harness_server.py workflow-context-gate --label <name>`
+- Plan freshness gate:
+  - `python3 tools/dev_harness_server.py update-plan-freshness --max-age-s 21600`
 
 ## 7. Network Research Rule
 For volatile facts, high-risk changes, and explicit “check latest” requests:

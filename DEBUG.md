@@ -25,3 +25,10 @@ python3 tools/dev_harness_server.py workflow-context-gate --label local
 ```bash
 ./tools/verify_fail_fast.sh
 ```
+
+## 5) Plan Sync Snapshot
+
+```bash
+python3 tools/dev_harness_server.py update-plan-sync --summary "local debug snapshot" --status IN_PROGRESS --label local
+python3 tools/dev_harness_server.py update-plan-freshness --max-age-s 21600
+```

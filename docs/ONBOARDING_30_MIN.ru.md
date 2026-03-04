@@ -17,6 +17,7 @@
 ```bash
 python3 tools/agent_bootstrap.py
 python3 tools/dev_harness_server.py workflow-context-gate --label onboarding
+python3 tools/dev_harness_server.py update-plan-sync --summary "onboarding snapshot" --status IN_PROGRESS --label onboarding
 ```
 
 ## 3) Базовая верификация (5 мин)

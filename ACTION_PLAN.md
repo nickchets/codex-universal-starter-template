@@ -12,7 +12,7 @@ Use this file for intake, decomposition, board transitions, and wrapper-gated ex
 - Latest user directive is captured verbatim in `docs/DIRECTIVE_REGISTER.md` and linked to the active card.
 - `workflow-context-gate --strict-medium` is `PASS` before `DOING -> DONE`.
 - `context-bootstrap.status_code == 0` before `DOING -> DONE`.
-- Plan-sync freshness hook is `PASS` (if the project enables explicit `update_plan` sync/freshness checks).
+- `update-plan-freshness` is `PASS` before `DOING -> DONE`.
 - `EVIDENCE_LOG.md` contains a structured evidence block with commands + artifacts.
 
 ### Constraints
@@ -74,14 +74,14 @@ For each task in `DOING`, use atomized steps (`8-20` recommended) in this format
 - [ ] Check-A (contract): directive schema validation passes.
 - [ ] Check-B (behavior): `python3 tools/dev_harness_server.py directive-freshness --max-age-s 43200` returns PASS.
 
-- [ ] Step: Sync plan snapshot via wrapper (or project-specific `update_plan` hook when available).
-- [ ] Done when: active `DOING` mapping is fresh and deterministic in wrapper snapshots.
-- [ ] Verify/Evidence: `python3 tools/dev_harness_server.py context-bootstrap --label boot_001_plan_sync`.
-- [ ] Check-A (contract): `context-bootstrap.summary.board_counts.DOING == 1`.
-- [ ] Check-B (behavior): active `doing_card` in wrapper output matches `BOOT-001`.
+- [ ] Step: Sync plan snapshot via wrapper command.
+- [ ] Done when: `update-plan-sync` writes a fresh snapshot linked to active `DOING`.
+- [ ] Verify/Evidence: `python3 tools/dev_harness_server.py update-plan-sync --summary "BOOT-001 plan snapshot" --status IN_PROGRESS --label boot_001_plan_sync`.
+- [ ] Check-A (contract): `python3 tools/dev_harness_server.py update-plan-freshness --max-age-s 21600` returns PASS.
+- [ ] Check-B (behavior): `python3 tools/dev_harness_server.py update-plan-trace --doing-card BOOT-001 --limit 1` shows the latest row bound to `BOOT-001`.
 
 - [ ] Step: Run strict wrapper gate chain.
-- [ ] Done when: `workflow-context-gate`, `governance-audit`, `context-bootstrap` are PASS.
+- [ ] Done when: `workflow-context-gate`, `governance-audit`, `context-bootstrap`, `update-plan-freshness` are PASS.
 - [ ] Verify/Evidence: gate command outputs + artifact paths in `shared/spikes/...`.
 - [ ] Check-A (contract): `DOING==1`, `NEXT<=3`.
 - [ ] Check-B (behavior): spike artifacts contain `status_code=0` and active card mapping.
@@ -101,4 +101,4 @@ For each task in `DOING`, use atomized steps (`8-20` recommended) in this format
 ## Queue Refresh Log
 
 - 2026-03-03: Initial board seeded from template.
-- 2026-03-04: Wrapper governance contour upgraded (double-check protocol + update_plan close-gate + structured evidence format).
+- 2026-03-04: Wrapper governance contour upgraded (double-check protocol + update-plan close-gate + structured evidence format).

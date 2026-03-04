@@ -25,6 +25,7 @@
 - Протокол сохранения контекста:
   - порядок bootstrap-загрузки
   - реестр директив пользователя
+  - цикл обновления плана (`sync/freshness/trace`)
   - workflow context gate
 - Легкие инструменты:
   - `tools/agent_bootstrap.py`
@@ -44,6 +45,7 @@
 ```bash
 python3 tools/agent_bootstrap.py
 python3 tools/dev_harness_server.py workflow-context-gate --label bootstrap
+python3 tools/dev_harness_server.py update-plan-sync --summary "bootstrap snapshot" --status IN_PROGRESS --label bootstrap
 ```
 
 4. Запустите базовую проверку:

@@ -23,7 +23,7 @@ Metrics update (optional):
 - `<agent_metrics command>`
 
 Directive/context sync (optional):
-- `<directive-track or workflow-context-gate evidence>`
+- `<directive-track/update-plan-freshness/workflow-context-gate evidence>`
 
 Decision:
 - <accepted outcome>

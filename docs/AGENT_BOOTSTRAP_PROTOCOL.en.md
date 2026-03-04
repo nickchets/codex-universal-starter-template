@@ -9,6 +9,7 @@ Use this protocol when:
 1. Run:
    - `python3 tools/agent_bootstrap.py`
    - `python3 tools/dev_harness_server.py workflow-context-gate --label bootstrap`
+   - `python3 tools/dev_harness_server.py update-plan-sync --summary "bootstrap snapshot" --status IN_PROGRESS --label bootstrap`
 2. Load context in strict order:
    - `PROJECT_MANIFEST.md`
    - `docs/ADR/README.md`

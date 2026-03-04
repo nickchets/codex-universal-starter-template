@@ -32,5 +32,6 @@ Use this before coding starts.
 ```bash
 python3 tools/agent_bootstrap.py
 python3 tools/dev_harness_server.py workflow-context-gate --label startup
+python3 tools/dev_harness_server.py update-plan-sync --summary "startup snapshot" --status IN_PROGRESS --label startup
 ./tools/verify_fail_fast.sh
 ```

@@ -19,11 +19,14 @@ Goal:
 2. Capture directive (verbatim) in register.
 3. Map directive to board card in `ACTION_PLAN.md`.
 4. Update contracts in `PROJECT_MANIFEST.md` if acceptance/behavior changed.
-5. Run governance gate:
+5. Sync active board snapshot:
+   - `python3 tools/dev_harness_server.py update-plan-sync --summary "<current step>" --status IN_PROGRESS --label <name>`
+6. Run governance gate:
    - `python3 tools/dev_harness_server.py workflow-context-gate --label <name>`
-6. Append command/artifact evidence to `EVIDENCE_LOG.md`.
+7. Append command/artifact evidence to `EVIDENCE_LOG.md`.
 
 ## Non-Ambiguity Rules
 - No `DOING->DONE` without evidence.
 - No directive may disappear without register entry.
 - No board with invalid invariants (`DOING != 1` or `NEXT > 3`).
+- No stale plan snapshot before close (`update-plan-freshness` must be PASS).

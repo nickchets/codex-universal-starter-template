@@ -26,6 +26,7 @@ These instructions apply to the whole repository.
    - `EVIDENCE_LOG.md`
    - `DEBUG.md`
    - `docs/CONTEXT_SYNC_PROTOCOL.en.md`
+   - `docs/DIRECTIVE_REGISTER.md`
 4. Confirm board invariants:
    - `DOING == 1`
    - `NEXT <= 3`
@@ -52,11 +53,16 @@ These instructions apply to the whole repository.
 ## Context Sync Rule
 - Every new user directive must be:
   - captured verbatim in `docs/DIRECTIVE_REGISTER.md`,
+  - synced to active `DOING` via `update-plan-sync`,
   - mapped to board work in `ACTION_PLAN.md`,
-  - linked to verify hooks in `EVIDENCE_LOG.md`.
+  - linked to verify hooks in `EVIDENCE_LOG.md`,
+  - freshness-checked via `update-plan-freshness` before close.
 
 Preferred command:
 `python3 tools/dev_harness_server.py directive-sync --message "<verbatim>" --intent "<EXEC_NOW|WORKFLOW_IDEA>" --planned-integration "<card/scope>" --label <name>`
+
+Plan sync command:
+`python3 tools/dev_harness_server.py update-plan-sync --summary "<active step>" --status IN_PROGRESS --label <name>`
 
 ## Verification Baseline
 - `./tools/verify_fail_fast.sh`

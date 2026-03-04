@@ -19,11 +19,14 @@
 2. Зафиксировать директиву verbatim в реестре.
 3. Привязать директиву к карточке доски в `ACTION_PLAN.md`.
 4. Обновить контракты в `PROJECT_MANIFEST.md`, если меняется поведение/приемка.
-5. Прогнать governance gate:
+5. Синхронизировать снимок активного плана:
+   - `python3 tools/dev_harness_server.py update-plan-sync --summary "<current step>" --status IN_PROGRESS --label <name>`
+6. Прогнать governance gate:
    - `python3 tools/dev_harness_server.py workflow-context-gate --label <name>`
-6. Добавить evidence-блок с командами и артефактами в `EVIDENCE_LOG.md`.
+7. Добавить evidence-блок с командами и артефактами в `EVIDENCE_LOG.md`.
 
 ## Правила Неоднозначности
 - Нельзя закрывать `DOING->DONE` без evidence.
 - Нельзя терять директиву без записи в реестре.
 - Нельзя работать с невалидной доской (`DOING != 1` или `NEXT > 3`).
+- Нельзя закрывать задачу с устаревшим снимком плана (`update-plan-freshness` должен быть PASS).
