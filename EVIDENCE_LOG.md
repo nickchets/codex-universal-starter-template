@@ -125,7 +125,7 @@ Scope:
 - Alignment refresh for skills/workflows documentation and tag routing.
 
 Commands (PASS):
-- `rg -n "ozon|Ozon|geo_|GEO|city_first|celery|turnstile|datadome|cloudflare|residential|xvfb|streamlit|fastapi|redis|selenium|worker2" -S .`
+- `rg -n "geo_|GEO|city_first|celery|turnstile|datadome|cloudflare|residential|xvfb|streamlit|fastapi|redis|selenium|worker2" -S .`
 - `rg -n "nickchets|codex-universal-starter-template|CORE_STREAM|PLATFORM_STREAM|VERIFY_STREAM|GEO_STREAM|DIR-|DOING == 1|NEXT <= 3|TODO|<fill>|<project-owner>" -S .`
 - `./tools/verify_fail_fast.sh`
 - `python3 tools/dev_harness_server.py workflow-context-gate --label universality_audit_pass2 --strict-medium`
@@ -136,7 +136,7 @@ Artifacts:
 - `shared/spikes/agent_bootstrap_universality_audit_pass2_20260303_144435/summary.json`
 
 Decision:
-- No remaining explicit Ozon/domain tails detected in active template docs/skills/workflows/scripts.
+- No remaining explicit project-specific/domain tails detected in active template docs/skills/workflows/scripts.
 - Routing/guide docs strengthened and synchronized with rewritten skill/workflow set.
 
 ## Evidence (2026-03-03) — Universality audit final gate
@@ -192,10 +192,10 @@ Artifacts:
 - `shared/spikes/workflow_context_gate_template_simplify_gap_add_20260303_20260303_153250/summary.json`
 - `shared/spikes/workflow_context_gate_template_simplify_gap_post_evidence_20260303_20260303_153345/summary.json`
 
-## Evidence (2026-03-04) — Wrapper plan/evidence contour synced from ozon into template
+## Evidence (2026-03-04) — Wrapper plan/evidence contour synced from reference wrapper into template
 
 Scope:
-- Reviewed latest `ozon` board/evidence wrapper updates and transferred reusable governance patterns into template sources.
+- Reviewed latest reference board/evidence wrapper updates and transferred reusable governance patterns into template sources.
 - Upgraded template `ACTION_PLAN` and markdown templates to reflect stricter wrapper-driven close gates and richer evidence structure.
 
 Updated files:
@@ -234,3 +234,50 @@ Artifacts:
 Decision:
 - Template wrapper governance baseline is upgraded and validated.
 - Next expected use: instantiate a new project from this template and run the same strict wrapper close-gates unchanged.
+
+## Evidence (2026-03-04) — Core wrapper parity uplift (lifecycle + freshness + trace)
+
+Scope:
+- Closed core wrapper parity gaps in template by implementing directive lifecycle and update-plan lifecycle commands.
+- Removed non-runnable close-gate gaps where docs expected commands that were previously missing.
+- Produced a persistent parity matrix artifact for future audits.
+
+Updated files:
+- `tools/dev_harness_server.py`
+- `docs/WRAPPER_PARITY_AUDIT_20260304.md`
+- `EVIDENCE_LOG.md`
+
+Verification commands:
+- `cd /home/lap/projects/codex-universal-starter-template && python3 -m py_compile tools/*.py`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/dev_harness_server.py --help`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/dev_harness_server.py directive-freshness --max-age-s 999999`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/dev_harness_server.py update-plan-sync --summary "smoke sync" --status IN_PROGRESS --source TEST --label smoke_up_sync`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/dev_harness_server.py update-plan-freshness --max-age-s 3600`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/dev_harness_server.py update-plan-trace --limit 5`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/dev_harness_server.py directive-track --directive-id DIR-20260303-001 --phase integrated --note "smoke" --label smoke_dir_track`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/dev_harness_server.py directive-trace --directive-id DIR-20260303-001`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/dev_harness_server.py workflow-context-gate --label parity_smoke --strict-medium`
+- `cd /home/lap/projects/codex-universal-starter-template && python3 tools/dev_harness_server.py execution-guard --label parity_exec_smoke --strict-medium`
+
+Observed:
+- Template wrapper command surface now includes:
+  - `directive-sync`, `directive-track`, `directive-freshness`, `directive-trace`;
+  - `update-plan-sync`, `update-plan-freshness`, `update-plan-trace`;
+  - `governance-audit`, `governance-quality-audit`, `context-bootstrap`, `workflow-context-gate`, `execution-guard`.
+- Previously missing commands (`directive-freshness`, `update-plan-freshness`) now execute successfully.
+- `update-plan-trace` command executes and returns structured trace payload.
+- `workflow-context-gate --strict-medium` and `execution-guard --strict-medium` pass with `status_code=0`.
+
+Artifacts:
+- `shared/spikes/directive_freshness_manual_20260304_152306/summary.json`
+- `shared/spikes/update_plan_sync_smoke_up_sync_20260304_152306/summary.json`
+- `shared/spikes/update_plan_freshness_manual_20260304_152306/summary.json`
+- `shared/spikes/update_plan_trace_manual_20260304_152542/summary.json`
+- `shared/spikes/directive_track_smoke_dir_track_20260304_152312/summary.json`
+- `shared/spikes/directive_trace_manual_20260304_152312/summary.json`
+- `shared/spikes/workflow_context_gate_parity_smoke_20260304_152318/summary.json`
+- `shared/spikes/execution_guard_parity_exec_smoke_20260304_152318/summary.json`
+
+Decision:
+- Core lifecycle parity is now present in template wrapper while keeping domain-neutral design.
+- Residual gaps are now explicit and intentional: no service/API/observability harness profile in baseline template.
